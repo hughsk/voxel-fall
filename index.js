@@ -5,20 +5,22 @@ import getEye from 'eye-vector'
 import Sphere from './sphere'
 import mesher from './mesher'
 import Chunk from './chunk'
+import Box from './box'
 import raf from 'raf'
 
 const canvas = document.body.appendChild(document.createElement('canvas'))
 const camera = Camera(canvas)
 const gl = canvas.getContext('webgl')
 const sphere = new Sphere(gl)
+const box = new Box(gl)
 
 camera.distance = 4
 
 const chunks = {}
 const CHUNK_SIZE = 12
-
 const proj = new Float32Array(16)
 const view = new Float32Array(16)
+const start = Date.now()
 
 render()
 function render () {
@@ -78,6 +80,7 @@ function render () {
   }
 
   sphere.draw(proj, view, [0, 0, 0])
+  box.draw(proj, view, [-1, -1, -1], [+1, Math.sin((Date.now() - start) / 1000), +1])
 
   raf(render)
 }
