@@ -4,6 +4,7 @@ import combine from 'mesh-combine'
 import Box from 'primitive-cube'
 import terrain from './terrain'
 import ndarray from 'ndarray'
+import CANNON from 'cannon'
 
 const mesher = greedy({
   order: [0, 1, 2],
@@ -24,8 +25,10 @@ const mesher = greedy({
       pos[i][2] = pos[i][2] === -0.5 ? zlo : zhi
     }
 
+    // Physics
+    const pmesh = new CANNON.Box(new CANNON.Vec3(xd, yd, zd))
 
-    output.push({ mesh })
+    output.push({ mesh, pmesh })
   }
 })
 
@@ -43,16 +46,22 @@ export default function generate (lo, hi) {
     }
   }
 
-  var array = ndarray(data, dims)
-  var output = []
+  const array = ndarray(data, dims)
+  const output = []
 
   mesher(array, output)
 
-  var mesh = combine(output.map(d => d.mesh))
+  const mesh = combine(output.map(d => d.mesh))
+
+  const pbody = output.reduce((terrainBody, {pmesh}) => {
+    terrainBody.addShape(pmesh)
+    return terrainBody
+  }, new CANNON.Body({ mass: 0 }))
 
   return {
-    mesh: mesh,
-    lo: lo,
-    hi: hi
+    mesh,
+    lo,
+    hi,
+    pbody
   }
 }
