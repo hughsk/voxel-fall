@@ -5,6 +5,7 @@ import Geometry from 'gl-geometry'
 import normals from 'face-normals'
 import unindex from 'unindex-mesh'
 import Shader from 'gl-shader'
+import eye from 'eye-vector'
 
 const glslify = require('glslify')
 var shader
@@ -23,6 +24,7 @@ export default class Chunk {
       , glslify('./chunk.frag')
     )
 
+    this.eye = new Float32Array(3)
     this.disposed = false
     this.model = identity(new Float32Array(16))
     translate(this.model, this.model, [
@@ -37,6 +39,7 @@ export default class Chunk {
     this.geometry.bind(this.shader)
     this.shader.uniforms.proj = proj
     this.shader.uniforms.view = view
+    this.shader.uniforms.eye = eye(view, this.eye)
   }
 
   draw (proj, view) {

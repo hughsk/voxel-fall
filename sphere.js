@@ -5,6 +5,7 @@ import normals from 'face-normals'
 import Geometry from 'gl-geometry'
 import icosphere from 'icosphere'
 import Shader from 'gl-shader'
+import eye from 'eye-vector'
 
 const glslify = require('glslify')
 
@@ -19,6 +20,7 @@ export default class Sphere {
       .attr('position', positions)
       .attr('normal', normals(positions))
 
+    this.eye = new Float32Array(3)
     this.shader = Shader(gl
       , glslify('./chunk.vert')
       , glslify('./chunk.frag')
@@ -33,6 +35,7 @@ export default class Sphere {
     this.shader.uniforms.proj = proj
     this.shader.uniforms.view = view
     this.shader.uniforms.model = this.model
+    this.shader.uniforms.eye = eye(view, this.eye)
     this.geometry.draw()
   }
 
