@@ -11,6 +11,8 @@ const camera = Camera(canvas)
 const gl = canvas.getContext('webgl')
 const sphere = new Sphere(gl)
 
+camera.distance = 4
+
 const chunks = {}
 const CHUNK_SIZE = 12
 
