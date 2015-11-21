@@ -1,6 +1,7 @@
 import perspective from 'gl-mat4/perspective'
 import Camera from 'canvas-orbit-camera'
 import getEye from 'eye-vector'
+import Sphere from './sphere'
 import mesher from './mesher'
 import Chunk from './chunk'
 import raf from 'raf'
@@ -8,6 +9,7 @@ import raf from 'raf'
 const canvas = document.body.appendChild(document.createElement('canvas'))
 const camera = Camera(canvas)
 const gl = canvas.getContext('webgl')
+const sphere = new Sphere(gl)
 
 const chunks = {}
 const CHUNK_SIZE = 12
@@ -33,7 +35,7 @@ function render () {
   const currChunk0 = Math.round(eye[2] / CHUNK_SIZE)
   const currChunk1 = Math.round(eye[1] / CHUNK_SIZE)
   const currChunk2 = Math.round(eye[0] / CHUNK_SIZE)
-  const chunkRadius = 2
+  const chunkRadius = 3
 
   for (var key in chunks) {
     if (!chunks.hasOwnProperty(key)) continue
@@ -63,11 +65,14 @@ function render () {
     if (!chunks[key].safe) {
       chunks[key].dispose()
       delete chunks[key]
-    } else {
-      chunk.bind(proj, view)
-      chunk.draw(proj, view)
+      continue
     }
+
+    chunk.bind(proj, view)
+    chunk.draw(proj, view)
   }
+
+  sphere.draw(proj, view, [0, 0, 0])
 
   raf(render)
 }
