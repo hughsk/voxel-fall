@@ -35,9 +35,9 @@ export default function generate (lo, hi) {
   const data = new Float32Array(size)
 
   var i = 0
-  for (var x = 0; x < dims[0]; x++) {
-    for (var y = 0; y < dims[1]; y++) {
-      for (var z = 0; z < dims[2]; z++) {
+  for (var z = lo[2]; z < hi[2]; z++) {
+    for (var y = lo[1]; y < hi[1]; y++) {
+      for (var x = lo[0]; x < hi[0]; x++) {
         data[i++] = terrain(x, y, z)
       }
     }
@@ -46,33 +46,13 @@ export default function generate (lo, hi) {
   var array = ndarray(data, dims)
   var output = []
 
-  // for (var x = 0; x < dims[0]; x++) {
-  //   for (var y = 0; y < dims[1]; y++) {
-  //     for (var z = 0; z < dims[2]; z++) {
-  //       if (terrain(x, y, z) > 0) {
-  //         var box = Cube(1)
-  //
-  //         for (var p = 0; p < box.positions.length; p++) {
-  //           box.positions[p][0] += x
-  //           box.positions[p][1] += y
-  //           box.positions[p][2] += z
-  //         }
-  //
-  //         output.push({ mesh: box })
-  //       }
-  //     }
-  //   }
-  // }
-
-
-
   mesher(array, output)
 
   var mesh = combine(output.map(d => d.mesh))
 
-  // console.log(mesh.cells)
-
   return {
-    mesh: mesh
+    mesh: mesh,
+    lo: lo,
+    hi: hi
   }
 }

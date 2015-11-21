@@ -1,3 +1,5 @@
+import translate from 'gl-mat4/translate'
+import identity from 'gl-mat4/identity'
 import wireframe from 'gl-wireframe'
 import Geometry from 'gl-geometry'
 import normals from 'face-normals'
@@ -19,15 +21,23 @@ export default class Chunk {
       , glslify('./chunk.vert')
       , glslify('./chunk.frag')
     )
+
+    this.model = identity(new Float32Array(16))
+    translate(this.model, this.model, [
+      -data.lo[0],
+      data.lo[1],
+      -data.lo[2]
+    ])
   }
 
-  bind () {
+  bind (proj, view) {
     this.geometry.bind(this.shader)
+    this.shader.uniforms.proj = proj
+    this.shader.uniforms.view = view
   }
 
   draw (proj, view) {
-    this.shader.uniforms.proj = proj
-    this.shader.uniforms.view = view
+    this.shader.uniforms.model = this.model
     this.gl.lineWidth(10)
     this.geometry.draw()
   }
