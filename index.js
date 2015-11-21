@@ -34,7 +34,7 @@ function render () {
   camera.view(view)
   camera.tick()
 
-  lookAt(view, [0, 5, 5], [0, 0, 0], [0, 1, 0])
+  lookAt(view, [5, 5, 5], [0, 0, 0], [0, 1, 0])
 
   const eye = getEye(view)
   const currChunk0 = Math.round(eye[2] / CHUNK_SIZE)
