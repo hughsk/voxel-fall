@@ -7,6 +7,7 @@ import unindex from 'unindex-mesh'
 import Shader from 'gl-shader'
 
 const glslify = require('glslify')
+var shader
 
 export default class Chunk {
   constructor (gl, data) {
@@ -17,11 +18,12 @@ export default class Chunk {
       .attr('position', positions)
       .attr('normal', normals(positions))
 
-    this.shader = Shader(gl
+    this.shader = shader = shader || Shader(gl
       , glslify('./chunk.vert')
       , glslify('./chunk.frag')
     )
 
+    this.disposed = false
     this.model = identity(new Float32Array(16))
     translate(this.model, this.model, [
       +data.lo[2],
@@ -31,14 +33,22 @@ export default class Chunk {
   }
 
   bind (proj, view) {
+    if (this.disposed) return
     this.geometry.bind(this.shader)
     this.shader.uniforms.proj = proj
     this.shader.uniforms.view = view
   }
 
   draw (proj, view) {
+    if (this.disposed) return
     this.shader.uniforms.model = this.model
-    this.gl.lineWidth(10)
     this.geometry.draw()
+  }
+
+  dispose () {
+    this.disposed = true
+    this.geometry.dispose()
+    this.geometry = null
+    this.shader = null
   }
 }

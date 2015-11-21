@@ -5,6 +5,7 @@
     "babelify": "^6.4.0",
     "canvas-fit": "^1.5.0",
     "canvas-orbit-camera": "^1.0.2",
+    "eye-vector": "0.0.0",
     "face-normals": "0.0.0",
     "gl-geometry": "^1.2.0",
     "gl-mat4": "^1.1.4",

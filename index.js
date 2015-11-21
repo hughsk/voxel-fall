@@ -1,5 +1,6 @@
 import perspective from 'gl-mat4/perspective'
 import Camera from 'canvas-orbit-camera'
+import getEye from 'eye-vector'
 import mesher from './mesher'
 import Chunk from './chunk'
 import raf from 'raf'
@@ -9,50 +10,66 @@ const camera = Camera(canvas)
 const gl = canvas.getContext('webgl')
 
 const chunks = {}
-
-for (var x = -2; x <= 1; x++) {
-  for (var y = -2; y <= 1; y++) {
-    for (var z = -2; z <= 1; z++) {
-      chunks[x+','+y+','+z] = new Chunk(gl, mesher(
-        [(x+0) * 16, (y+0) * 16, (z+0) * 16],
-        [(x+1) * 16, (y+1) * 16, (z+1) * 16]
-      ))
-    }
-  }
-}
-
-// const chunks = {
-//   '0,0,0': new Chunk(gl, mesher([-16, -16, -16], [16, 16, 16])),
-//   '0,0,1': new Chunk(gl, mesher([-16, -16, 16], [16, 16, 48])),
-//   '0,1,0': new Chunk(gl, mesher([-16, 16, -16], [16, 48, 16]))
-// }
+const CHUNK_SIZE = 12
 
 const proj = new Float32Array(16)
 const view = new Float32Array(16)
 
 render()
 function render () {
-  raf(render)
-
   const { width, height } = canvas
 
   gl.viewport(0, 0, width, height)
   gl.clearColor(0, 0, 0, 1)
   gl.clear(gl.COLOR_BUFFER_BIT)
   gl.enable(gl.DEPTH_TEST)
-  gl.disable(gl.CULL_FACE)
+  gl.enable(gl.CULL_FACE)
 
   perspective(proj, Math.PI / 4, width / height, 0.5, 500)
   camera.view(view)
   camera.tick()
 
+  const eye = getEye(view)
+  const currChunk0 = Math.round(eye[2] / CHUNK_SIZE)
+  const currChunk1 = Math.round(eye[1] / CHUNK_SIZE)
+  const currChunk2 = Math.round(eye[0] / CHUNK_SIZE)
+  const chunkRadius = 2
+
+  for (var key in chunks) {
+    if (!chunks.hasOwnProperty(key)) continue
+    chunks[key].safe = false
+  }
+
+  for (var x = currChunk0 - chunkRadius; x <= currChunk0 + chunkRadius; x++) {
+    for (var y = currChunk1 - chunkRadius; y <= currChunk1 + chunkRadius; y++) {
+      for (var z = currChunk2 - chunkRadius; z <= currChunk2 + chunkRadius; z++) {
+        var key = x + '|' + y + '|' + z
+        if (!chunks[key]) {
+          chunks[key] = new Chunk(gl, mesher(
+            [x * CHUNK_SIZE, y * CHUNK_SIZE, z * CHUNK_SIZE],
+            [x * CHUNK_SIZE + CHUNK_SIZE, y * CHUNK_SIZE + CHUNK_SIZE, z * CHUNK_SIZE + CHUNK_SIZE]
+          ))
+        }
+
+        chunks[key].safe = true
+      }
+    }
+  }
+
   for (var key in chunks) {
     if (!chunks.hasOwnProperty(key)) continue
     var chunk = chunks[key]
 
-    chunk.bind(proj, view)
-    chunk.draw(proj, view)
+    if (!chunks[key].safe) {
+      chunks[key].dispose()
+      delete chunks[key]
+    } else {
+      chunk.bind(proj, view)
+      chunk.draw(proj, view)
+    }
   }
+
+  raf(render)
 }
 
 window.addEventListener('resize'
