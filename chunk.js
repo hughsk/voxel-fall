@@ -24,9 +24,9 @@ export default class Chunk {
 
     this.model = identity(new Float32Array(16))
     translate(this.model, this.model, [
-      -data.lo[0],
-      data.lo[1],
-      -data.lo[2]
+      +data.lo[2],
+      +data.lo[1],
+      +data.lo[0]
     ])
   }
 
