@@ -220,7 +220,7 @@ score.setAttribute('style', `
   pointer-events: none;
   font-family: 'Input Sans';
   font-weight: 100;
-  font-size: 1.25em;
+  font-size: 0.95em;
   padding: 1rem 2rem;
   border-radius: 0.5rem;
   background: rgba(0, 0, 0, 0.85);
