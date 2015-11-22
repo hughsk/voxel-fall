@@ -21,13 +21,32 @@ camera.distance = 4
 
 // Physics
 const world = new CANNON.World()
-world.gravity = new CANNON.Vec3(0, -0.982, 0)
+world.quatNormalizeFast = true;
+world.quatNormalizeSkip = 0;
+world.broadphase.useBoundingBoxes = true;
+world.gravity = new CANNON.Vec3(0, -9.82, 0)
+world.broadphase = new CANNON.NaiveBroadphase();
+var solver = new CANNON.GSSolver();
+solver.iterations = 2;
+world.defaultContactMaterial.contactEquationRegularizationTime = 0.55;
+solver.tolerance = 0.01;
+world.solver = solver// new CANNON.SplitSolver(solver);
+
+world.quatNormalizeFast = true;
+world.quatNormalizeSkip = 0;
+world.broadphase.useBoundingBoxes = true;
+
+world.defaultContactMaterial.friction = 0.7
+world.defaultContactMaterial.restitution = 0.0
+world.defaultContactMaterial.contactEquationStiffness = 1e9;
+world.defaultContactMaterial.contactEquationRegularizationTime = 4;
+
 const timer = Timer()
 const TIME_STEP = 1.0 / 60.0 // seconds
-const MAX_SUB_STEPS = 3
+const MAX_SUB_STEPS = 1
 
 const ball = makeBall()
-
+window.CANNON = CANNON
 window.world = world
 
 // Chunks
@@ -38,6 +57,9 @@ const view = new Float32Array(16)
 const start = Date.now()
 
 render()
+//setInterval(() => {
+  //console.log('collisionMatrix', world.collisionMatrix.matrix.length)
+//})
 function render () {
 
   // Phsics
@@ -100,17 +122,16 @@ function render () {
     chunk.draw(proj, view)
   }
 
-  for (var i = 0, l = world.bodies.length; i < l; i++) {
-    var v = world.bodies[i];
-    if (v === ball) continue
-    v.computeAABB()
-    const {lowerBound, upperBound} = v.aabb
-    const p = v.position
-      //console.log(lowerBound, upperBound)
-    box.draw(proj, view, [lowerBound.x, lowerBound.y, lowerBound.z], [upperBound.x, upperBound.y, upperBound.z])
-  }
+  //for (var i = 0, l = world.bodies.length; i < l; i++) {
+    //var v = world.bodies[i];
+    //if (v === ball) continue
+    //v.computeAABB()
+    //const {lowerBound, upperBound} = v.aabb
+    //const p = v.position
+    //box.draw(proj, view, [lowerBound.x, lowerBound.y, lowerBound.z], [upperBound.x, upperBound.y, upperBound.z])
+  //}
 
-  sphere.draw(proj, view, [ball.position.x,  ball.position.y, ball.position.z])
+  sphere.draw(proj, view, [ball.position.x,  ball.position.y, ball.position.z], [ball.quaternion.x, ball.quaternion.y, ball.quaternion.z, ball.quaternion.w])
 
   raf(render)
 }

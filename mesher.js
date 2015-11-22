@@ -26,9 +26,10 @@ const mesher = greedy({
       pos[i][1] = pos[i][1] === -0.5 ? ylo : yhi
       pos[i][2] = pos[i][2] === -0.5 ? zlo : zhi
     }
+
     // Physics
     const pmesh = new CANNON.Box(new CANNON.Vec3(xd/2, yd/2, zd/2))
-    const body = new CANNON.Body({ mass: 0 })
+    const body = new CANNON.Body({ mass: 0, allowSleep: true })
     body.addShape(pmesh)
     body.position.set(
       (xlo + xhi) / 2,
