@@ -21,7 +21,7 @@ camera.distance = 4
 
 // Physics
 const world = new CANNON.World()
-world.gravity = new CANNON.Vec3(0, 0, -9.82)
+world.gravity = new CANNON.Vec3(0, -0.982, 0)
 const timer = Timer()
 const TIME_STEP = 1.0 / 60.0 // seconds
 const MAX_SUB_STEPS = 3
@@ -42,7 +42,6 @@ function render () {
 
   // Phsics
   world.step(TIME_STEP, timer(), MAX_SUB_STEPS)
-  //console.log(ball.position)
 
   const { width, height } = canvas
 
@@ -56,8 +55,9 @@ function render () {
   perspective(proj, Math.PI / 4, width / height, 0.5, 500)
   camera.view(view)
   camera.tick()
+  camera.center = [ball.position.x,  ball.position.y, ball.position.z]
 
-  // lookAt(view, [5, 5, 5], [0, 0, 0], [0, 1, 0])
+  //lookAt(view, [5, 5, 5], [ball.position.x,  ball.position.y, ball.position.z], [0, 1, 0])
 
   const eye = getEye(view)
   const currChunk0 = Math.round(eye[2] / CHUNK_SIZE)
@@ -100,6 +100,16 @@ function render () {
     chunk.draw(proj, view)
   }
 
+  for (var i = 0, l = world.bodies.length; i < l; i++) {
+    var v = world.bodies[i];
+    if (v === ball) continue
+    v.computeAABB()
+    const {lowerBound, upperBound} = v.aabb
+    const p = v.position
+      //console.log(lowerBound, upperBound)
+    box.draw(proj, view, [lowerBound.x, lowerBound.y, lowerBound.z], [upperBound.x, upperBound.y, upperBound.z])
+  }
+
   sphere.draw(proj, view, [ball.position.x,  ball.position.y, ball.position.z])
 
   raf(render)
@@ -110,7 +120,7 @@ function makeBall() {
   var radius = 1; // m
   var sphereBody = new CANNON.Body({
     mass: 5, // kg
-    position: new CANNON.Vec3(0, 0, 10), // m
+    position: new CANNON.Vec3(0, 10, 0), // m
     shape: new CANNON.Sphere(radius),
     linearDamping: 0.1
   })

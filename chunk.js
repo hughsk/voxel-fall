@@ -37,13 +37,8 @@ export default class Chunk {
 
     // Physics
     this.world = world
-    this.physics = data.pbody
-    this.physics.position.set(
-      +data.lo[2],
-      +data.lo[1],
-      +data.lo[0]
-    )
-    world.addBody(data.pbody)
+    this.physics = data.bodies
+    this.physics.forEach(b => world.addBody(b))
   }
 
   bind (proj, view) {
@@ -64,7 +59,9 @@ export default class Chunk {
   dispose () {
     this.disposed = true
     this.geometry.dispose()
-    this.world.removeBody(this.physics)
+    this.physics.forEach(b => {
+      this.world.removeBody(b)
+    })
     this.world = null
     this.geometry = null
     this.shader = null

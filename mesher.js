@@ -6,6 +6,8 @@ import terrain from './terrain'
 import ndarray from 'ndarray'
 import CANNON from 'cannon'
 
+    console.log('2')
+
 const mesher = greedy({
   order: [0, 1, 2],
   extraArgs: 1,
@@ -24,11 +26,16 @@ const mesher = greedy({
       pos[i][1] = pos[i][1] === -0.5 ? ylo : yhi
       pos[i][2] = pos[i][2] === -0.5 ? zlo : zhi
     }
-
     // Physics
-    const pmesh = new CANNON.Box(new CANNON.Vec3(xd, yd, zd))
-
-    output.push({ mesh, pmesh })
+    const pmesh = new CANNON.Box(new CANNON.Vec3(xd/2, yd/2, zd/2))
+    const body = new CANNON.Body({ mass: 0 })
+    body.addShape(pmesh)
+    body.position.set(
+      (xlo + xhi) / 2,
+      (ylo + yhi) / 2,
+      (zlo + zhi) / 2
+    )
+    output.push({ mesh, body })
   }
 })
 
@@ -52,16 +59,20 @@ export default function generate (lo, hi) {
   mesher(array, output)
 
   const mesh = combine(output.map(d => d.mesh))
+  const bodies = output.map(d => d.body)
+  bodies.forEach(b => {
+    b.position.set(
+      b.position.x + lo[2],
+      b.position.y + lo[1],
+      b.position.z + lo[0]
+    )
+  })
 
-  const pbody = output.reduce((terrainBody, {pmesh}) => {
-    terrainBody.addShape(pmesh)
-    return terrainBody
-  }, new CANNON.Body({ mass: 0 }))
 
   return {
     mesh,
     lo,
     hi,
-    pbody
+    bodies: output.map(d => d.body)
   }
 }
