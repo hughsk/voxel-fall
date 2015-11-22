@@ -80,7 +80,7 @@ function render () {
   camera.tick()
   camera.center = [ball.position.x,  ball.position.y, ball.position.z]
 
-  //lookAt(view, [5, 5, 5], [ball.position.x,  ball.position.y, ball.position.z], [0, 1, 0])
+  lookAt(view, [ball.position.x, ball.position.y + 15, ball.position.z - 0.1], [ball.position.x, ball.position.y, ball.position.z], [0, 1, 0])
 
   const eye = getEye(view)
   const currChunk0 = Math.round(camera.center[2] / CHUNK_SIZE)
