@@ -30,7 +30,7 @@ void main() {
   float spec = gauss(normalize(lightDir), normalize(viewDiff), vnormal, 0.5);
 
   vec3 material = vec3(1);
-  float att = calcLightAttenuation(length(lightDir), 20.0, 0.2);
+  float att = calcLightAttenuation(length(lightDir), 20.0, 0.5);
   vec3 lcol = att * vec3(1, 0.7, 0.4);
 
 
@@ -39,7 +39,7 @@ void main() {
 
   vec3 color = lcol * vec3(material * diff + spec);
 
-  color = mix(color, vec3(0, 0, -0.4), fog(length(viewDiff), 0.01));
+  color = mix(color, vec3(-0.6, -0.9, 0.1), fog(length(viewDiff), 0.02));
 
   gl_FragColor = vec4(color, 1);
 }

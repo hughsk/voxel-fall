@@ -1,4 +1,5 @@
 import perspective from 'gl-mat4/perspective'
+import pressed from 'key-pressed'
 import ortho from 'gl-mat4/ortho'
 import Camera from 'canvas-orbit-camera'
 import lookAt from 'gl-mat4/lookAt'
@@ -68,7 +69,7 @@ function render () {
   const { width, height } = canvas
 
   gl.viewport(0, 0, width, height)
-  gl.clearColor(0, 0, 0, 1)
+  gl.clearColor(0, 0, 0.1, 1)
   gl.clear(gl.COLOR_BUFFER_BIT)
   gl.enable(gl.DEPTH_TEST)
   gl.enable(gl.CULL_FACE)
@@ -82,9 +83,9 @@ function render () {
   //lookAt(view, [5, 5, 5], [ball.position.x,  ball.position.y, ball.position.z], [0, 1, 0])
 
   const eye = getEye(view)
-  const currChunk0 = Math.round(eye[2] / CHUNK_SIZE)
-  const currChunk1 = Math.round(eye[1] / CHUNK_SIZE)
-  const currChunk2 = Math.round(eye[0] / CHUNK_SIZE)
+  const currChunk0 = Math.round(camera.center[2] / CHUNK_SIZE)
+  const currChunk1 = Math.round(camera.center[1] / CHUNK_SIZE)
+  const currChunk2 = Math.round(camera.center[0] / CHUNK_SIZE)
 
   for (var key in chunks) {
     if (!chunks.hasOwnProperty(key)) continue
@@ -117,7 +118,7 @@ function render () {
       continue
     }
 
-    chunk.bind(proj, view)
+    chunk.bind(proj, view, camera.center)
     chunk.draw(proj, view)
   }
 

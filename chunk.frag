@@ -14,11 +14,11 @@ void main() {
   float diff = orenn(direction, normalize(viewDiff), vnormal, 0.9, 0.95) + 0.3;
   float spec = gauss(direction, normalize(viewDiff), vnormal, 0.5);
 
-  vec3 material = vec3(1, 0.7, 0.4) * 5.0;
+  vec3 material = vec3(1.8, 0.7, 0.4) * 5.0;
 
   vec3 color = vec3(material * diff + spec * material) * 0.5;
 
-  color = mix(color, vec3(0, 0, -0.4), fog(length(viewDiff), 0.01));
+  color = mix(color, vec3(0, 0, 0), fog(length(viewDiff), 0.01));
 
   gl_FragColor = vec4(color, 1);
 }

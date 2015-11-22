@@ -45,14 +45,14 @@ export default class Chunk {
 
   }
 
-  bind (proj, view) {
+  bind (proj, view, light) {
     if (this.disposed) return
     this.geometry.bind(this.shader)
     this.shader.uniforms.proj = proj
     this.shader.uniforms.view = view
     this.shader.uniforms.norm = norm
     this.shader.uniforms.eye = eye(view, this.eye)
-    this.shader.uniforms.light = [0, 0, 0]
+    this.shader.uniforms.light = light
   }
 
   draw (proj, view) {
