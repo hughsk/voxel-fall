@@ -21,6 +21,10 @@ const sphere = new Sphere(gl)
 const box = new Box(gl)
 camera.distance = 4
 
+let badBallStrength = 0.8
+
+let gameOver = false
+
 // Physics
 const world = new CANNON.World()
 world.quatNormalizeFast = true;
@@ -49,10 +53,12 @@ const MAX_SUB_STEPS = 1
 const MAX_VELOCITY = 10
 
 const ball = makeBall([0, 10, 0])
-const badBall = makeBall([-5, 10, 0])
+const badBall = makeBall([-10, 20, 0])
 
 window.CANNON = CANNON
 window.world = world
+window.ball = ball
+window.badBall = badBall
 
 // Chunks
 const chunks = {}
@@ -135,11 +141,6 @@ function render () {
       const boxEntity = chunk.boxes[i]
       box.draw(proj, view, [boxEntity.position.x, boxEntity.position.y, boxEntity.position.z], [boxEntity.quaternion.x, boxEntity.quaternion.y, boxEntity.quaternion.z, boxEntity.quaternion.w])
     }
-
-    //const boxEntity = chunk.boxes[0]
-    //if (boxEntity) {
-      //console.log('box', boxEntity.position.x, boxEntity.position.y, boxEntity.position.z)
-    //}
   }
 
   //for (var i = 0, l = world.bodies.length; i < l; i++) {
@@ -152,14 +153,15 @@ function render () {
 
   sphere.draw(proj, view, [1.8, 0.7, 0.4], [ball.position.x, ball.position.y, ball.position.z], [ball.quaternion.x, ball.quaternion.y, ball.quaternion.z, ball.quaternion.w])
   sphere.draw(proj, view, [0.3, 0.8, 1.8], [badBall.position.x, badBall.position.y, badBall.position.z], [badBall.quaternion.x, badBall.quaternion.y, badBall.quaternion.z, badBall.quaternion.w])
+  if (gameOver) return
   const lr = pressed('<right>') - pressed('<left>')
   const ud = pressed('<up>') - pressed('<down>')
   const jump = pressed('<space>')
-
+  const d = badBall.position.vsub(ball.position).unit().mult(badBallStrength)
   badBall.velocity.set(
-    Math.max(Math.min(badBall.velocity.x, MAX_VELOCITY), -MAX_VELOCITY),
-    Math.max(Math.min(badBall.velocity.y, MAX_VELOCITY), -MAX_VELOCITY),
-    Math.max(Math.min(badBall.velocity.z, MAX_VELOCITY), -MAX_VELOCITY)
+    Math.max(Math.min(badBall.velocity.x - d.x, MAX_VELOCITY), -MAX_VELOCITY),
+    Math.max(Math.min(badBall.velocity.y - d.y, MAX_VELOCITY), -MAX_VELOCITY),
+    Math.max(Math.min(badBall.velocity.z - d.z, MAX_VELOCITY), -MAX_VELOCITY)
   )
   ball.velocity.set(
     Math.max(Math.min(ball.velocity.x - lr, MAX_VELOCITY), -MAX_VELOCITY),
@@ -172,13 +174,16 @@ function render () {
 
 let boxesCollected = 0
 ball.addEventListener("collide",function(e){
-  if (!e.body.isBox) return
-  const b = e.body
-  console.log('BOXES COLLECTED', ++boxesCollected)
-  setTimeout(() => {
-    b.chunk.removeBox(b)
-  })
-});
+  if (e.body.isBox) {
+    const b = e.body
+    setTimeout(() => {
+      b.chunk.removeBox(b)
+    })
+  } else if (e.body === badBall) {
+    gameOver = true
+    setTimeout(() => location.reload(), 1000)
+  }
+})
 
 function makeBall(position) {
   // Create a sphere
@@ -187,10 +192,9 @@ function makeBall(position) {
     mass: 5, // kg
     position: new CANNON.Vec3(...position), // m
     shape: new CANNON.Sphere(radius),
-    linearDamping: 0.1
+    linearDamping: 0.1,
   })
-
-  //sphereBody.velocity = new CANNON.Vec3(2 * Math.random(), Math.random(), 5 * Math.random())
+  sphereBody.angularVelocity.set(Math.random(), Math.random(), Math.random())
   world.addBody(sphereBody)
   return sphereBody
 }
