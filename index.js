@@ -48,10 +48,8 @@ const TIME_STEP = 1.0 / 60.0 // seconds
 const MAX_SUB_STEPS = 1
 const MAX_VELOCITY = 10
 
-const ball = makeBall()
-
-const boxes = []
-const MAX_BOXES = 20
+const ball = makeBall([0, 10, 0])
+const badBall = makeBall([-5, 10, 0])
 
 window.CANNON = CANNON
 window.world = world
@@ -152,11 +150,17 @@ function render () {
     //const p = v.position
   //}
 
-
-  sphere.draw(proj, view, [ball.position.x, ball.position.y, ball.position.z], [ball.quaternion.x, ball.quaternion.y, ball.quaternion.z, ball.quaternion.w])
+  sphere.draw(proj, view, [1.8, 0.7, 0.4], [ball.position.x, ball.position.y, ball.position.z], [ball.quaternion.x, ball.quaternion.y, ball.quaternion.z, ball.quaternion.w])
+  sphere.draw(proj, view, [0.3, 0.8, 1.8], [badBall.position.x, badBall.position.y, badBall.position.z], [badBall.quaternion.x, badBall.quaternion.y, badBall.quaternion.z, badBall.quaternion.w])
   const lr = pressed('<right>') - pressed('<left>')
   const ud = pressed('<up>') - pressed('<down>')
   const jump = pressed('<space>')
+
+  badBall.velocity.set(
+    Math.max(Math.min(badBall.velocity.x, MAX_VELOCITY), -MAX_VELOCITY),
+    Math.max(Math.min(badBall.velocity.y, MAX_VELOCITY), -MAX_VELOCITY),
+    Math.max(Math.min(badBall.velocity.z, MAX_VELOCITY), -MAX_VELOCITY)
+  )
   ball.velocity.set(
     Math.max(Math.min(ball.velocity.x - lr, MAX_VELOCITY), -MAX_VELOCITY),
     Math.max(Math.min(ball.velocity.y + jump, MAX_VELOCITY), -MAX_VELOCITY),
@@ -165,6 +169,7 @@ function render () {
 
   raf(render)
 }
+
 let boxesCollected = 0
 ball.addEventListener("collide",function(e){
   if (!e.body.isBox) return
@@ -175,12 +180,12 @@ ball.addEventListener("collide",function(e){
   })
 });
 
-function makeBall() {
+function makeBall(position) {
   // Create a sphere
   var radius = 1; // m
   var sphereBody = new CANNON.Body({
     mass: 5, // kg
-    position: new CANNON.Vec3(0, 10, 0), // m
+    position: new CANNON.Vec3(...position), // m
     shape: new CANNON.Sphere(radius),
     linearDamping: 0.1
   })
