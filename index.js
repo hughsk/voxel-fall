@@ -215,12 +215,15 @@ const score = document.createElement('div')
 score.setAttribute('style', `
   position: absolute;
   left: 50%;
-  top: 2rem;
+  bottom: 2rem;
   transform: translate(-50%, 0);
   pointer-events: none;
   font-family: 'Input Sans';
   font-weight: 100;
-  font-size: 2em;
+  font-size: 1.25em;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.85);
   text-transform: uppercase;
   color: #53ffa7;
 `)
