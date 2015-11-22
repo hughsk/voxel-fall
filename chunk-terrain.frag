@@ -30,7 +30,7 @@ void main() {
   float spec = gauss(normalize(lightDir), normalize(viewDiff), vnormal, 0.5);
 
   vec3 material = vec3(1);
-  float att = calcLightAttenuation(length(lightDir), 20.0, 0.2);
+  float att = calcLightAttenuation(length(lightDir), 20.0, 0.4);
   vec3 lcol = att * vec3(1, 0.7, 0.4);
 
 
