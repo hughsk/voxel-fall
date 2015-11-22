@@ -27,7 +27,7 @@ export default class Sphere {
     this.eye = new Float32Array(3)
     this.shader = Shader(gl
       , glslify('./chunk.vert')
-      , glslify('./chunk.frag')
+      , glslify('./chunk-box.frag')
     )
   }
 

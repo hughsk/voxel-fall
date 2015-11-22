@@ -107,5 +107,3 @@ function makeBox(pos) {
   box.isBox = true
   return box
 }
-
-

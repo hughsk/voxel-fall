@@ -218,8 +218,8 @@ score.setAttribute('style', `
   bottom: 0;
   padding: 0.5em 2ch;
   pointer-events: none;
-  font-family: sans-serif;
-  font-weight: bold;
+  font-family: 'Input Sans';
+  font-weight: 100;
   font-size: 2em;
   text-transform: uppercase;
   color: #53ffa7;
