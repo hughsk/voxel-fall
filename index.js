@@ -214,9 +214,9 @@ window.addEventListener('resize'
 const score = document.createElement('div')
 score.setAttribute('style', `
   position: absolute;
-  right: 0;
-  bottom: 0;
-  padding: 0.5em 2ch;
+  left: 50%;
+  top: 2rem;
+  transform: translate(-50%, 0);
   pointer-events: none;
   font-family: 'Input Sans';
   font-weight: 100;
