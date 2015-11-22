@@ -163,10 +163,13 @@ function render () {
     Math.max(Math.min(badBall.velocity.y - d.y, MAX_VELOCITY), -MAX_VELOCITY),
     Math.max(Math.min(badBall.velocity.z - d.z, MAX_VELOCITY), -MAX_VELOCITY)
   )
+
+  ball.applyForce(new CANNON.Vec3(-lr, jump, ud).mult(100), ball.position);
+
   ball.velocity.set(
-    Math.max(Math.min(ball.velocity.x - lr, MAX_VELOCITY), -MAX_VELOCITY),
-    Math.max(Math.min(ball.velocity.y + jump, MAX_VELOCITY), -MAX_VELOCITY),
-    Math.max(Math.min(ball.velocity.z + ud, MAX_VELOCITY), -MAX_VELOCITY)
+    Math.max(Math.min(ball.velocity.x, MAX_VELOCITY), -MAX_VELOCITY),
+    Math.max(Math.min(ball.velocity.y, MAX_VELOCITY), -MAX_VELOCITY),
+    Math.max(Math.min(ball.velocity.z, MAX_VELOCITY), -MAX_VELOCITY)
   )
 
   raf(render)
