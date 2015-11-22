@@ -16,7 +16,7 @@ void main() {
 
   vec3 material = vec3(1.8, 0.7, 0.4) * 5.0;
 
-  vec3 color = vec3(material * diff + spec * material) * 0.5;
+  vec3 color = vec3(material * diff + spec * material) * vec3(0.5, 0.5, 0.75);
 
   color = mix(color, vec3(0, 0, 0), fog(length(viewDiff), 0.01));
 
