@@ -31,7 +31,7 @@ export default class Sphere {
     )
   }
 
-  draw (proj, view, position, rotation) {
+  draw (proj, view, color, position, rotation) {
     identity(this.model)
     fromRotationTranslation(this.model, rotation, position)
     mat4.multiply(norm, view, this.model)
@@ -43,6 +43,7 @@ export default class Sphere {
     this.shader.uniforms.model = this.model
     this.shader.uniforms.norm = norm
     this.shader.uniforms.eye = eye(view, this.eye)
+    this.shader.uniforms.sphereColor = color
     this.geometry.draw()
   }
 

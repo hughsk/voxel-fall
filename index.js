@@ -75,7 +75,6 @@ function render () {
   gl.enable(gl.DEPTH_TEST)
   gl.enable(gl.CULL_FACE)
 
-  // ortho(proj, -20, 20, 20, -20, 500, 0.5)
   perspective(proj, Math.PI / 4, width / height, 0.5, 500)
   camera.view(view)
   camera.tick()
@@ -119,7 +118,7 @@ function render () {
       continue
     }
 
-    chunk.bind(proj, view, camera.center)
+    chunk.bind(proj, view, camera.center, [camera.center[0] - 5, camera.center[1], camera.center[2]])
     chunk.draw(proj, view)
   }
 
@@ -132,7 +131,9 @@ function render () {
     //box.draw(proj, view, [lowerBound.x, lowerBound.y, lowerBound.z], [upperBound.x, upperBound.y, upperBound.z])
   //}
 
-  sphere.draw(proj, view, [ball.position.x, ball.position.y, ball.position.z], [ball.quaternion.x, ball.quaternion.y, ball.quaternion.z, ball.quaternion.w])
+  sphere.draw(proj, view, [1.8, 0.7, 0.4], [ball.position.x, ball.position.y, ball.position.z], [ball.quaternion.x, ball.quaternion.y, ball.quaternion.z, ball.quaternion.w])
+  sphere.draw(proj, view, [0.3, 0.8, 1.8], [ball.position.x - 5, ball.position.y, ball.position.z], [ball.quaternion.x, ball.quaternion.y, ball.quaternion.z, ball.quaternion.w])
+
   const lr = pressed('<right>') - pressed('<left>')
   const ud = pressed('<up>') - pressed('<down>')
   const jump = pressed('<space>')
