@@ -6,7 +6,7 @@ import terrain from './terrain'
 import ndarray from 'ndarray'
 import CANNON from 'cannon'
 
-    console.log('2')
+const STATIC_BODY = { mass: 0, allowSleep: true }
 
 const mesher = greedy({
   order: [0, 1, 2],
@@ -42,8 +42,6 @@ const mesher = greedy({
     output.push({ mesh, physics })
   }
 })
-
-const STATIC_BODY = { mass: 0, allowSleep: true }
 
 export default function generate (lo, hi) {
   const dims = [hi[0] - lo[0], hi[1] - lo[1], hi[2] - lo[2]]
