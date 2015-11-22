@@ -218,7 +218,7 @@ score.setAttribute('style', `
   bottom: 2rem;
   transform: translate(-50%, 0);
   pointer-events: none;
-  font-family: 'Input Sans';
+  font-family: 'Input Sans', sans-serif;
   font-weight: 100;
   font-size: 0.95em;
   padding: 1rem 2rem;
