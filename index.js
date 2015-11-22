@@ -46,6 +46,7 @@ world.defaultContactMaterial.contactEquationRegularizationTime = 4;
 const timer = Timer()
 const TIME_STEP = 1.0 / 60.0 // seconds
 const MAX_SUB_STEPS = 1
+const MAX_VELOCITY = 10
 
 const ball = makeBall()
 window.CANNON = CANNON
@@ -134,11 +135,11 @@ function render () {
   sphere.draw(proj, view, [ball.position.x, ball.position.y, ball.position.z], [ball.quaternion.x, ball.quaternion.y, ball.quaternion.z, ball.quaternion.w])
   const lr = pressed('<right>') - pressed('<left>')
   const ud = pressed('<up>') - pressed('<down>')
-  const MAX_VELOCITY = 10
+  const jump = pressed('<space>')
   ball.velocity.set(
-    Math.max(Math.min(ball.velocity.x + lr, MAX_VELOCITY), -MAX_VELOCITY),
-    Math.max(Math.min(ball.velocity.y, MAX_VELOCITY), -MAX_VELOCITY),
-    Math.max(Math.min(ball.velocity.z - ud, MAX_VELOCITY), -MAX_VELOCITY),
+    Math.max(Math.min(ball.velocity.x - lr, MAX_VELOCITY), -MAX_VELOCITY),
+    Math.max(Math.min(ball.velocity.y + jump, MAX_VELOCITY), -MAX_VELOCITY),
+    Math.max(Math.min(ball.velocity.z + ud, MAX_VELOCITY), -MAX_VELOCITY),
   )
 
   raf(render)
