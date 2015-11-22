@@ -53,7 +53,7 @@ const MAX_SUB_STEPS = 1
 const MAX_VELOCITY = 10
 
 const ball = makeBall([0, 10, 0])
-const badBall = makeBall([-10, 20, 0])
+const badBall = makeBall([-10, 20, 0], 20)
 
 window.CANNON = CANNON
 window.world = world
@@ -191,11 +191,11 @@ ball.addEventListener("collide",function(e){
   }
 })
 
-function makeBall(position) {
+function makeBall(position, mass = 5) {
   // Create a sphere
   var radius = 1; // m
   var sphereBody = new CANNON.Body({
-    mass: 5, // kg
+    mass, // kg
     position: new CANNON.Vec3(...position), // m
     shape: new CANNON.Sphere(radius),
     linearDamping: 0.1,
