@@ -129,7 +129,7 @@ function render () {
       continue
     }
 
-    chunk.bind(proj, view, camera.center, [camera.center[0] - 5, camera.center[1], camera.center[2]])
+    chunk.bind(proj, view, camera.center, [badBall.position.x, badBall.position.y, badBall.position.z])
     chunk.draw(proj, view)
     for (var i = 0; i < chunk.boxes.length; i++) {
       const boxEntity = chunk.boxes[i]

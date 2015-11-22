@@ -43,6 +43,7 @@ export default class Sphere {
     this.shader.uniforms.model = this.model
     this.shader.uniforms.norm = norm
     this.shader.uniforms.eye = eye(view, this.eye)
+    this.shader.uniforms.sphereColor = [0.3, 1, 0.4]
     this.geometry.draw()
   }
 
@@ -53,4 +54,3 @@ export default class Sphere {
     this.geometry = null
   }
 }
-

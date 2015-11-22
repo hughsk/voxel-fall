@@ -55,7 +55,7 @@ export default function generate (lo, hi) {
       for (var x = lo[0]; x < hi[0]; x++) {
         data[i++] = terrain(x, y, z)
         if (data[i] <= 0 && Math.random() < 0.0001) {
-          boxes.push([x, y, z])
+          boxes.push([z, y, x])
         }
       }
     }
