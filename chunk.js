@@ -12,6 +12,8 @@ import glVec3 from 'gl-vec3'
 const glslify = require('glslify')
 var shader
 
+const norm = identity(new Float32Array(16))
+
 export default class Chunk {
   constructor (gl, world, data) {
     const positions = unindex(data.mesh)
@@ -48,6 +50,7 @@ export default class Chunk {
     this.geometry.bind(this.shader)
     this.shader.uniforms.proj = proj
     this.shader.uniforms.view = view
+    this.shader.uniforms.norm = norm
     this.shader.uniforms.eye = eye(view, this.eye)
     this.shader.uniforms.light = [0, 0, 0]
   }
