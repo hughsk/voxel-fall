@@ -1,4 +1,5 @@
 import perspective from 'gl-mat4/perspective'
+import ortho from 'gl-mat4/ortho'
 import Camera from 'canvas-orbit-camera'
 import lookAt from 'gl-mat4/lookAt'
 import getEye from 'eye-vector'
@@ -17,7 +18,7 @@ const box = new Box(gl)
 camera.distance = 4
 
 const chunks = {}
-const CHUNK_SIZE = 12
+const CHUNK_SIZE = 16
 const proj = new Float32Array(16)
 const view = new Float32Array(16)
 const start = Date.now()
@@ -32,11 +33,12 @@ function render () {
   gl.enable(gl.DEPTH_TEST)
   gl.enable(gl.CULL_FACE)
 
+  // ortho(proj, -20, 20, 20, -20, 500, 0.5)
   perspective(proj, Math.PI / 4, width / height, 0.5, 500)
   camera.view(view)
   camera.tick()
 
-  lookAt(view, [5, 5, 5], [0, 0, 0], [0, 1, 0])
+  // lookAt(view, [5, 5, 5], [0, 0, 0], [0, 1, 0])
 
   const eye = getEye(view)
   const currChunk0 = Math.round(eye[2] / CHUNK_SIZE)
@@ -80,7 +82,7 @@ function render () {
   }
 
   sphere.draw(proj, view, [0, 0, 0])
-  box.draw(proj, view, [-1, -1, -1], [+1, Math.sin((Date.now() - start) / 1000), +1])
+  box.draw(proj, view, [-1 + 5 * Math.cos(Date.now() / 1000), -1, -1], [+1 + 5 * Math.cos(Date.now() / 1000), Math.sin((Date.now() - start) / 1000), +1])
 
   raf(render)
 }

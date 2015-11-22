@@ -7,5 +7,9 @@ export default function terrain (x, y, z) {
   y *= 0.04
   z *= 0.04
 
-  return noise.noise3D(x, y, z) - 0.3 - y * 10 - 2
+  return (
+    noise.noise3D(x, y, z) +
+    noise.noise3D(x * 4.1, y * 4.1, z * 4.1) * 0.2 +
+    noise.noise3D(x * 0.1, y * 0.1, z * 0.1)
+  ) - 0.3 - Math.max(0, y * 2)
 }

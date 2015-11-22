@@ -21,7 +21,7 @@ export default class Chunk {
 
     this.shader = shader = shader || Shader(gl
       , glslify('./chunk.vert')
-      , glslify('./chunk.frag')
+      , glslify('./chunk-terrain.frag')
     )
 
     this.eye = new Float32Array(3)
