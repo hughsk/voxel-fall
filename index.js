@@ -3,13 +3,14 @@ import ortho from 'gl-mat4/ortho'
 import Camera from 'canvas-orbit-camera'
 import lookAt from 'gl-mat4/lookAt'
 import getEye from 'eye-vector'
+import raf from 'raf'
+import CANNON from 'cannon'
+import Timer from 'delta-timer'
+
 import Sphere from './sphere'
 import mesher from './mesher'
 import Chunk from './chunk'
 import Box from './box'
-import raf from 'raf'
-import CANNON from 'cannon'
-import Timer from 'delta-timer'
 
 const canvas = document.body.appendChild(document.createElement('canvas'))
 const camera = Camera(canvas)
@@ -30,7 +31,7 @@ var solver = new CANNON.GSSolver();
 solver.iterations = 2;
 world.defaultContactMaterial.contactEquationRegularizationTime = 0.55;
 solver.tolerance = 0.01;
-world.solver = solver// new CANNON.SplitSolver(solver);
+world.solver = solver
 
 world.quatNormalizeFast = true;
 world.quatNormalizeSkip = 0;
@@ -52,6 +53,7 @@ window.world = world
 // Chunks
 const chunks = {}
 const CHUNK_SIZE = 16
+const CHUNK_RADIUS = 2
 const proj = new Float32Array(16)
 const view = new Float32Array(16)
 const start = Date.now()
@@ -60,7 +62,7 @@ render()
 
 function render () {
 
-  // Phsics
+  // Physics
   world.step(TIME_STEP, timer(), MAX_SUB_STEPS)
 
   const { width, height } = canvas
@@ -83,16 +85,15 @@ function render () {
   const currChunk0 = Math.round(eye[2] / CHUNK_SIZE)
   const currChunk1 = Math.round(eye[1] / CHUNK_SIZE)
   const currChunk2 = Math.round(eye[0] / CHUNK_SIZE)
-  const chunkRadius = 1
 
   for (var key in chunks) {
     if (!chunks.hasOwnProperty(key)) continue
     chunks[key].safe = false
   }
 
-  for (var x = currChunk0 - chunkRadius; x <= currChunk0 + chunkRadius; x++) {
-    for (var y = currChunk1 - chunkRadius; y <= currChunk1 + chunkRadius; y++) {
-      for (var z = currChunk2 - chunkRadius; z <= currChunk2 + chunkRadius; z++) {
+  for (var x = currChunk0 - CHUNK_RADIUS; x <= currChunk0 + CHUNK_RADIUS; x++) {
+    for (var y = currChunk1 - CHUNK_RADIUS; y <= currChunk1 + CHUNK_RADIUS; y++) {
+      for (var z = currChunk2 - CHUNK_RADIUS; z <= currChunk2 + CHUNK_RADIUS; z++) {
         var key = x + '|' + y + '|' + z
         if (!chunks[key]) {
           chunks[key] = new Chunk(gl, world, mesher(
@@ -129,7 +130,7 @@ function render () {
     //box.draw(proj, view, [lowerBound.x, lowerBound.y, lowerBound.z], [upperBound.x, upperBound.y, upperBound.z])
   //}
 
-  sphere.draw(proj, view, [ball.position.x,  ball.position.y, ball.position.z], [ball.quaternion.x, ball.quaternion.y, ball.quaternion.z, ball.quaternion.w])
+  sphere.draw(proj, view, [ball.position.x, ball.position.y, ball.position.z], [ball.quaternion.x, ball.quaternion.y, ball.quaternion.z, ball.quaternion.w])
 
   raf(render)
 }
@@ -144,7 +145,7 @@ function makeBall() {
     linearDamping: 0.1
   })
 
-  //sphereBody.velocity = new CANNON.Vec3(100 * Math.random(), Math.random(), 50 * Math.random())
+  sphereBody.velocity = new CANNON.Vec3(2 * Math.random(), Math.random(), 5 * Math.random())
   world.addBody(sphereBody)
   return sphereBody
 }

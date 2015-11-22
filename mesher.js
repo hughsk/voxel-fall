@@ -63,7 +63,7 @@ export default function generate (lo, hi) {
   mesher(array, output)
   const body = new CANNON.Body(STATIC_BODY)
 
-  let meshes = []
+  const meshes = []
 
   for (let i = 0; i < output.length; i++) {
     meshes.push(output[i].mesh)
