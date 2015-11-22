@@ -176,12 +176,18 @@ let boxesCollected = 0
 ball.addEventListener("collide",function(e){
   if (e.body.isBox) {
     const b = e.body
+    score.innerText = `Score: ${++boxesCollected}`
     setTimeout(() => {
       b.chunk.removeBox(b)
     })
   } else if (e.body === badBall) {
-    gameOver = true
-    setTimeout(() => location.reload(), 1000)
+    if (gameOver) return
+    setTimeout(() => {
+      gameOver = true
+      setTimeout(() => {
+        location.reload()
+      }, 1000)
+    }, 50)
   }
 })
 
@@ -204,3 +210,19 @@ window.addEventListener('resize'
   , require('canvas-fit')(canvas)
   , false
 )
+
+const score = document.createElement('div')
+score.setAttribute('style', `
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 0.5em 2ch;
+  pointer-events: none;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 2em;
+  text-transform: uppercase;
+  color: #53ffa7;
+`)
+score.innerText = 'Score: 0'
+document.body.appendChild(score)
