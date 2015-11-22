@@ -6,6 +6,7 @@
     "cannon": "^0.6.2",
     "canvas-fit": "^1.5.0",
     "canvas-orbit-camera": "^1.0.2",
+    "clamp": "^1.0.1",
     "delta-timer": "0.0.0",
     "eye-vector": "0.0.0",
     "face-normals": "0.0.0",

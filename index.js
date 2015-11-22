@@ -1,5 +1,6 @@
 import perspective from 'gl-mat4/perspective'
 import pressed from 'key-pressed'
+import clamp from 'clamp'
 import ortho from 'gl-mat4/ortho'
 import Camera from 'canvas-orbit-camera'
 import lookAt from 'gl-mat4/lookAt'
@@ -60,6 +61,8 @@ const proj = new Float32Array(16)
 const view = new Float32Array(16)
 const start = Date.now()
 
+var fov = Math.PI / 4
+
 render()
 
 function render () {
@@ -75,7 +78,14 @@ function render () {
   gl.enable(gl.DEPTH_TEST)
   gl.enable(gl.CULL_FACE)
 
-  perspective(proj, Math.PI / 4, width / height, 0.5, 500)
+  const fovMin = Math.PI / 5
+  const fovMax = Math.PI / 3
+  const ratio = clamp(ball.velocity.y * -0.1, -1, 1)
+  const fovTar = fovMin + (fovMax - fovMin) * ratio
+
+  fov += (fovTar - fov) * 0.025
+
+  perspective(proj, fov, width / height, 0.5, 500)
   camera.view(view)
   camera.tick()
   camera.center = [ball.position.x,  ball.position.y, ball.position.z]
@@ -140,7 +150,7 @@ function render () {
   ball.velocity.set(
     Math.max(Math.min(ball.velocity.x - lr, MAX_VELOCITY), -MAX_VELOCITY),
     Math.max(Math.min(ball.velocity.y + jump, MAX_VELOCITY), -MAX_VELOCITY),
-    Math.max(Math.min(ball.velocity.z + ud, MAX_VELOCITY), -MAX_VELOCITY),
+    Math.max(Math.min(ball.velocity.z + ud, MAX_VELOCITY), -MAX_VELOCITY)
   )
 
   raf(render)
