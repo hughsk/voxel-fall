@@ -13,8 +13,6 @@ import mesher from './mesher'
 import Chunk from './chunk'
 import Box from './box'
 
-import pressed from 'key-pressed'
-
 const canvas = document.body.appendChild(document.createElement('canvas'))
 const camera = Camera(canvas)
 const gl = canvas.getContext('webgl')
@@ -140,7 +138,7 @@ function render () {
   ball.velocity.set(
     Math.max(Math.min(ball.velocity.x + lr, MAX_VELOCITY), -MAX_VELOCITY),
     Math.max(Math.min(ball.velocity.y, MAX_VELOCITY), -MAX_VELOCITY),
-    Math.max(Math.min(ball.velocity.z + ud, MAX_VELOCITY), -MAX_VELOCITY),
+    Math.max(Math.min(ball.velocity.z - ud, MAX_VELOCITY), -MAX_VELOCITY),
   )
 
   raf(render)
