@@ -11,7 +11,7 @@ const glslify = require('glslify')
 
 export default class Sphere {
   constructor (gl, world) {
-    const positions = unindex(icosphere(3))
+    const positions = unindex(icosphere(1))
 
     this.gl = gl
     this.world = world

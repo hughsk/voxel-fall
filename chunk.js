@@ -40,6 +40,7 @@ export default class Chunk {
     this.shader.uniforms.proj = proj
     this.shader.uniforms.view = view
     this.shader.uniforms.eye = eye(view, this.eye)
+    this.shader.uniforms.light = [0, 0, 0]
   }
 
   draw (proj, view) {

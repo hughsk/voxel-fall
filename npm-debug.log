@@ -1,0 +1,277 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/nsolid', '/usr/local/bin/npm', 'install' ]
+2 info using npm@2.14.4
+3 info using node@v4.1.2
+4 verbose readDependencies loading dependencies from /Users/hughsk/src/hughsk/voxel-fall/package.json
+5 warn package.json voxel-fall@1.0.0 No description
+6 warn package.json voxel-fall@1.0.0 No repository field.
+7 warn package.json voxel-fall@1.0.0 No README data
+8 warn package.json voxel-fall@1.0.0 No license field.
+9 verbose install where, deps [ '/Users/hughsk/src/hughsk/voxel-fall',
+9 verbose install   [ 'babelify',
+9 verbose install     'cannon',
+9 verbose install     'canvas-fit',
+9 verbose install     'canvas-orbit-camera',
+9 verbose install     'eye-vector',
+9 verbose install     'delta-timer',
+9 verbose install     'face-normals',
+9 verbose install     'gl-geometry',
+9 verbose install     'gl-mat4',
+9 verbose install     'gl-shader',
+9 verbose install     'gl-vec3',
+9 verbose install     'gl-wireframe',
+9 verbose install     'glsl-diffuse-oren-nayar',
+9 verbose install     'glsl-fog',
+9 verbose install     'glsl-specular-gaussian',
+9 verbose install     'glslify',
+9 verbose install     'greedy-mesher',
+9 verbose install     'icosphere',
+9 verbose install     'mesh-combine',
+9 verbose install     'ndarray',
+9 verbose install     'ndarray-pack',
+9 verbose install     'primitive-box',
+9 verbose install     'primitive-cube',
+9 verbose install     'raf',
+9 verbose install     'simplex-noise',
+9 verbose install     'spatial-noise',
+9 verbose install     'unindex-mesh' ] ]
+10 verbose install where, peers [ '/Users/hughsk/src/hughsk/voxel-fall', [] ]
+11 verbose installManyTop reading for lifecycle /Users/hughsk/src/hughsk/voxel-fall/package.json
+12 info preinstall voxel-fall@1.0.0
+13 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/babelify/package.json
+14 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/canvas-fit/package.json
+15 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/canvas-orbit-camera/package.json
+16 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/eye-vector/package.json
+17 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/face-normals/package.json
+18 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/gl-geometry/package.json
+19 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/gl-mat4/package.json
+20 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/gl-shader/package.json
+21 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/gl-wireframe/package.json
+22 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/glsl-diffuse-oren-nayar/package.json
+23 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/glsl-fog/package.json
+24 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/glsl-specular-gaussian/package.json
+25 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/glslify/package.json
+26 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/greedy-mesher/package.json
+27 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/icosphere/package.json
+28 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/mesh-combine/package.json
+29 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/ndarray/package.json
+30 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/ndarray-pack/package.json
+31 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/primitive-box/package.json
+32 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/primitive-cube/package.json
+33 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/raf/package.json
+34 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/simplex-noise/package.json
+35 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/spatial-noise/package.json
+36 verbose installManyTop reading scoped package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/unindex-mesh/package.json
+37 verbose readDependencies loading dependencies from /Users/hughsk/src/hughsk/voxel-fall/package.json
+38 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/babelify/package.json
+39 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/canvas-fit/package.json
+40 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/canvas-orbit-camera/package.json
+41 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/eye-vector/package.json
+42 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/face-normals/package.json
+43 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/gl-geometry/package.json
+44 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/gl-mat4/package.json
+45 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/gl-shader/package.json
+46 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/gl-wireframe/package.json
+47 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/glsl-diffuse-oren-nayar/package.json
+48 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/glsl-fog/package.json
+49 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/glsl-specular-gaussian/package.json
+50 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/glslify/package.json
+51 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/greedy-mesher/package.json
+52 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/icosphere/package.json
+53 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/mesh-combine/package.json
+54 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/ndarray/package.json
+55 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/ndarray-pack/package.json
+56 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/primitive-box/package.json
+57 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/primitive-cube/package.json
+58 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/raf/package.json
+59 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/simplex-noise/package.json
+60 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/spatial-noise/package.json
+61 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/unindex-mesh/package.json
+62 verbose targetResolver reading package data from /Users/hughsk/src/hughsk/voxel-fall/node_modules/.bin/glslify/package.json
+63 silly cache add args [ 'cannon@^0.6.2', null ]
+64 verbose cache add spec cannon@^0.6.2
+65 silly cache add parsed spec Result {
+65 silly cache add   raw: 'cannon@^0.6.2',
+65 silly cache add   scope: null,
+65 silly cache add   name: 'cannon',
+65 silly cache add   rawSpec: '^0.6.2',
+65 silly cache add   spec: '>=0.6.2 <0.7.0',
+65 silly cache add   type: 'range' }
+66 silly addNamed cannon@>=0.6.2 <0.7.0
+67 verbose addNamed ">=0.6.2 <0.7.0" is a valid semver range for cannon
+68 silly addNameRange { name: 'cannon', range: '>=0.6.2 <0.7.0', hasData: false }
+69 silly mapToRegistry name cannon
+70 silly mapToRegistry using default registry
+71 silly mapToRegistry registry https://registry.npmjs.com/
+72 silly mapToRegistry uri https://registry.npmjs.com/cannon
+73 verbose addNameRange registry:https://registry.npmjs.com/cannon not in flight; fetching
+74 verbose already installed skipping canvas-fit@^1.5.0 /Users/hughsk/src/hughsk/voxel-fall
+75 verbose already installed skipping canvas-orbit-camera@^1.0.2 /Users/hughsk/src/hughsk/voxel-fall
+76 verbose already installed skipping eye-vector@0.0.0 /Users/hughsk/src/hughsk/voxel-fall
+77 verbose get https://registry.npmjs.com/cannon not expired, no request
+78 silly addNameRange number 2 { name: 'cannon', range: '>=0.6.2 <0.7.0', hasData: true }
+79 silly addNameRange versions [ 'cannon', [ '0.4.0', '0.5.0', '0.6.0', '0.6.1', '0.6.2' ] ]
+80 silly addNamed cannon@0.6.2
+81 verbose addNamed "0.6.2" is a plain semver version for cannon
+82 silly mapToRegistry name cannon
+83 silly mapToRegistry using default registry
+84 silly mapToRegistry registry https://registry.npmjs.com/
+85 silly mapToRegistry uri https://registry.npmjs.com/cannon
+86 verbose addRemoteTarball http://registry.npmjs.org/cannon/-/cannon-0.6.2.tgz not in flight; adding
+87 verbose addRemoteTarball [ 'http://registry.npmjs.org/cannon/-/cannon-0.6.2.tgz',
+87 verbose addRemoteTarball   '1e7bc72dd5841982f3c104c2bc578bfa4fb1c572' ]
+88 info retry fetch attempt 1 at 12:57:41 PM
+89 info attempt registry request try #1 at 12:57:41 PM
+90 http fetch GET http://registry.npmjs.org/cannon/-/cannon-0.6.2.tgz
+91 verbose request id 1b98548da57d5347
+92 silly cache add args [ 'delta-timer@0.0.0', null ]
+93 verbose cache add spec delta-timer@0.0.0
+94 silly cache add parsed spec Result {
+94 silly cache add   raw: 'delta-timer@0.0.0',
+94 silly cache add   scope: null,
+94 silly cache add   name: 'delta-timer',
+94 silly cache add   rawSpec: '0.0.0',
+94 silly cache add   spec: '0.0.0',
+94 silly cache add   type: 'version' }
+95 silly addNamed delta-timer@0.0.0
+96 verbose addNamed "0.0.0" is a plain semver version for delta-timer
+97 silly mapToRegistry name delta-timer
+98 silly mapToRegistry using default registry
+99 silly mapToRegistry registry https://registry.npmjs.com/
+100 silly mapToRegistry uri https://registry.npmjs.com/delta-timer
+101 verbose addNameVersion registry:https://registry.npmjs.com/delta-timer not in flight; fetching
+102 verbose already installed skipping face-normals@0.0.0 /Users/hughsk/src/hughsk/voxel-fall
+103 verbose already installed skipping gl-geometry@^1.2.0 /Users/hughsk/src/hughsk/voxel-fall
+104 verbose already installed skipping gl-mat4@^1.1.4 /Users/hughsk/src/hughsk/voxel-fall
+105 verbose already installed skipping gl-shader@^4.0.6 /Users/hughsk/src/hughsk/voxel-fall
+106 silly cache add args [ 'gl-vec3@^1.0.3', null ]
+107 verbose cache add spec gl-vec3@^1.0.3
+108 silly cache add parsed spec Result {
+108 silly cache add   raw: 'gl-vec3@^1.0.3',
+108 silly cache add   scope: null,
+108 silly cache add   name: 'gl-vec3',
+108 silly cache add   rawSpec: '^1.0.3',
+108 silly cache add   spec: '>=1.0.3 <2.0.0',
+108 silly cache add   type: 'range' }
+109 silly addNamed gl-vec3@>=1.0.3 <2.0.0
+110 verbose addNamed ">=1.0.3 <2.0.0" is a valid semver range for gl-vec3
+111 silly addNameRange { name: 'gl-vec3', range: '>=1.0.3 <2.0.0', hasData: false }
+112 silly mapToRegistry name gl-vec3
+113 silly mapToRegistry using default registry
+114 silly mapToRegistry registry https://registry.npmjs.com/
+115 silly mapToRegistry uri https://registry.npmjs.com/gl-vec3
+116 verbose addNameRange registry:https://registry.npmjs.com/gl-vec3 not in flight; fetching
+117 verbose already installed skipping gl-wireframe@^1.0.1 /Users/hughsk/src/hughsk/voxel-fall
+118 verbose already installed skipping glsl-diffuse-oren-nayar@^1.0.2 /Users/hughsk/src/hughsk/voxel-fall
+119 verbose already installed skipping glsl-fog@0.0.1 /Users/hughsk/src/hughsk/voxel-fall
+120 verbose already installed skipping glsl-specular-gaussian@^1.0.0 /Users/hughsk/src/hughsk/voxel-fall
+121 verbose already installed skipping glslify@^2.3.1 /Users/hughsk/src/hughsk/voxel-fall
+122 verbose get https://registry.npmjs.com/delta-timer not expired, no request
+123 verbose get https://registry.npmjs.com/gl-vec3 not expired, no request
+124 silly addNameRange number 2 { name: 'gl-vec3', range: '>=1.0.3 <2.0.0', hasData: true }
+125 silly addNameRange versions [ 'gl-vec3', [ '1.0.0', '1.0.1', '1.0.2', '1.0.3' ] ]
+126 silly addNamed gl-vec3@1.0.3
+127 verbose addNamed "1.0.3" is a plain semver version for gl-vec3
+128 silly mapToRegistry name delta-timer
+129 silly mapToRegistry using default registry
+130 silly mapToRegistry registry https://registry.npmjs.com/
+131 silly mapToRegistry uri https://registry.npmjs.com/delta-timer
+132 verbose addRemoteTarball http://registry.npmjs.org/delta-timer/-/delta-timer-0.0.0.tgz not in flight; adding
+133 verbose addRemoteTarball [ 'http://registry.npmjs.org/delta-timer/-/delta-timer-0.0.0.tgz',
+133 verbose addRemoteTarball   '820f6639190fe337bae464f3e7a0bbd9b73f884c' ]
+134 info retry fetch attempt 1 at 12:57:41 PM
+135 info attempt registry request try #1 at 12:57:41 PM
+136 http fetch GET http://registry.npmjs.org/delta-timer/-/delta-timer-0.0.0.tgz
+137 silly cache afterAdd gl-vec3@1.0.3
+138 verbose afterAdd /Users/hughsk/.npm/gl-vec3/1.0.3/package/package.json not in flight; writing
+139 verbose already installed skipping greedy-mesher@^1.0.2 /Users/hughsk/src/hughsk/voxel-fall
+140 verbose already installed skipping icosphere@^1.0.0 /Users/hughsk/src/hughsk/voxel-fall
+141 verbose already installed skipping mesh-combine@^1.1.0 /Users/hughsk/src/hughsk/voxel-fall
+142 verbose already installed skipping ndarray@^1.0.18 /Users/hughsk/src/hughsk/voxel-fall
+143 verbose afterAdd /Users/hughsk/.npm/gl-vec3/1.0.3/package/package.json written
+144 verbose already installed skipping ndarray-pack@^1.1.1 /Users/hughsk/src/hughsk/voxel-fall
+145 verbose already installed skipping primitive-box@^1.0.0 /Users/hughsk/src/hughsk/voxel-fall
+146 verbose already installed skipping primitive-cube@^1.0.2 /Users/hughsk/src/hughsk/voxel-fall
+147 verbose already installed skipping raf@^3.1.0 /Users/hughsk/src/hughsk/voxel-fall
+148 verbose already installed skipping simplex-noise@^2.2.0 /Users/hughsk/src/hughsk/voxel-fall
+149 verbose already installed skipping spatial-noise@^1.0.0 /Users/hughsk/src/hughsk/voxel-fall
+150 verbose already installed skipping unindex-mesh@^2.0.0 /Users/hughsk/src/hughsk/voxel-fall
+151 verbose already installed skipping babelify@^6.4.0 /Users/hughsk/src/hughsk/voxel-fall
+152 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 103.245.222.162:80
+153 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 103.245.222.162:80
+154 info attempt registry request try #2 at 12:59:06 PM
+155 http fetch GET http://registry.npmjs.org/cannon/-/cannon-0.6.2.tgz
+156 info attempt registry request try #2 at 12:59:06 PM
+157 http fetch GET http://registry.npmjs.org/delta-timer/-/delta-timer-0.0.0.tgz
+158 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 103.245.222.162:80
+159 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 103.245.222.162:80
+160 info attempt registry request try #3 at 1:01:21 PM
+161 http fetch GET http://registry.npmjs.org/cannon/-/cannon-0.6.2.tgz
+162 info attempt registry request try #3 at 1:01:21 PM
+163 http fetch GET http://registry.npmjs.org/delta-timer/-/delta-timer-0.0.0.tgz
+164 error fetch failed http://registry.npmjs.org/cannon/-/cannon-0.6.2.tgz
+165 warn retry will retry, error on last attempt: Error: connect ETIMEDOUT 103.245.222.162:80
+166 error fetch failed http://registry.npmjs.org/delta-timer/-/delta-timer-0.0.0.tgz
+167 warn retry will retry, error on last attempt: Error: connect ETIMEDOUT 103.245.222.162:80
+168 info retry fetch attempt 2 at 1:02:46 PM
+169 info attempt registry request try #1 at 1:02:46 PM
+170 http fetch GET http://registry.npmjs.org/cannon/-/cannon-0.6.2.tgz
+171 info retry fetch attempt 2 at 1:02:46 PM
+172 info attempt registry request try #1 at 1:02:46 PM
+173 http fetch GET http://registry.npmjs.org/delta-timer/-/delta-timer-0.0.0.tgz
+174 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 103.245.222.162:80
+175 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 103.245.222.162:80
+176 info attempt registry request try #2 at 1:04:12 PM
+177 http fetch GET http://registry.npmjs.org/cannon/-/cannon-0.6.2.tgz
+178 info attempt registry request try #2 at 1:04:12 PM
+179 http fetch GET http://registry.npmjs.org/delta-timer/-/delta-timer-0.0.0.tgz
+180 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 103.245.222.162:80
+181 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 103.245.222.162:80
+182 info attempt registry request try #3 at 1:06:28 PM
+183 http fetch GET http://registry.npmjs.org/cannon/-/cannon-0.6.2.tgz
+184 info attempt registry request try #3 at 1:06:28 PM
+185 http fetch GET http://registry.npmjs.org/delta-timer/-/delta-timer-0.0.0.tgz
+186 error fetch failed http://registry.npmjs.org/cannon/-/cannon-0.6.2.tgz
+187 warn retry will retry, error on last attempt: Error: connect ETIMEDOUT 103.245.222.162:80
+188 error fetch failed http://registry.npmjs.org/delta-timer/-/delta-timer-0.0.0.tgz
+189 warn retry will retry, error on last attempt: Error: connect ETIMEDOUT 103.245.222.162:80
+190 info retry fetch attempt 3 at 1:08:44 PM
+191 info attempt registry request try #1 at 1:08:44 PM
+192 http fetch GET http://registry.npmjs.org/cannon/-/cannon-0.6.2.tgz
+193 info retry fetch attempt 3 at 1:08:44 PM
+194 info attempt registry request try #1 at 1:08:44 PM
+195 http fetch GET http://registry.npmjs.org/delta-timer/-/delta-timer-0.0.0.tgz
+196 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 103.245.222.162:80
+197 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 103.245.222.162:80
+198 info attempt registry request try #2 at 1:10:10 PM
+199 http fetch GET http://registry.npmjs.org/cannon/-/cannon-0.6.2.tgz
+200 info attempt registry request try #2 at 1:10:10 PM
+201 http fetch GET http://registry.npmjs.org/delta-timer/-/delta-timer-0.0.0.tgz
+202 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 103.245.222.162:80
+203 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 103.245.222.162:80
+204 info attempt registry request try #3 at 1:12:26 PM
+205 http fetch GET http://registry.npmjs.org/cannon/-/cannon-0.6.2.tgz
+206 info attempt registry request try #3 at 1:12:26 PM
+207 http fetch GET http://registry.npmjs.org/delta-timer/-/delta-timer-0.0.0.tgz
+208 error fetch failed http://registry.npmjs.org/cannon/-/cannon-0.6.2.tgz
+209 error fetch failed http://registry.npmjs.org/delta-timer/-/delta-timer-0.0.0.tgz
+210 verbose stack Error: connect ETIMEDOUT 103.245.222.162:80
+210 verbose stack     at Object.exports._errnoException (util.js:849:11)
+210 verbose stack     at exports._exceptionWithHostPort (util.js:872:20)
+210 verbose stack     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1060:14)
+211 verbose cwd /Users/hughsk/src/hughsk/voxel-fall
+212 error Darwin 14.4.0
+213 error argv "/usr/local/bin/nsolid" "/usr/local/bin/npm" "install"
+214 error node v4.1.2
+215 error npm  v2.14.4
+216 error code ETIMEDOUT
+217 error errno ETIMEDOUT
+218 error syscall connect
+219 error network connect ETIMEDOUT 103.245.222.162:80
+219 error network This is most likely not a problem with npm itself
+219 error network and is related to network connectivity.
+219 error network In most cases you are behind a proxy or have bad network settings.
+219 error network
+219 error network If you are behind a proxy, please make sure that the
+219 error network 'proxy' config is set properly.  See: 'npm help config'
+220 verbose exit [ 1, true ]
