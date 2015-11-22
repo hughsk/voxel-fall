@@ -82,7 +82,7 @@ function render () {
   }
 
   sphere.draw(proj, view, [0, 0, 0])
-  box.draw(proj, view, [-1 + 5 * Math.cos(Date.now() / 1000), -1, -1], [+1 + 5 * Math.cos(Date.now() / 1000), Math.sin((Date.now() - start) / 1000), +1])
+  // box.draw(proj, view, [-1 + 5 * Math.cos(Date.now() / 1000), -1, -1], [+1 + 5 * Math.cos(Date.now() / 1000), Math.sin((Date.now() - start) / 1000), +1])
 
   raf(render)
 }

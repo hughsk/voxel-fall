@@ -21,7 +21,7 @@ void main() {
 
   vec3 color = vec3(material * diff + spec * material) * 0.5;
 
-  color = mix(color, vec3(1.15, 1.1, 1.2), fog(length(viewDiff), 0.01));
+  color = mix(color, vec3(1.15, 1.1, 1.2), fog(length(viewDiff), 0.05));
 
   gl_FragColor = vec4(color, 1);
 }

@@ -4,12 +4,11 @@ const noise = new Noise()
 
 export default function terrain (x, y, z) {
   x *= 0.04
-  y *= 0.04
+  y *= 0.01
   z *= 0.04
 
   return (
-    noise.noise3D(x, y, z) +
-    noise.noise3D(x * 4.1, y * 4.1, z * 4.1) * 0.2 +
-    noise.noise3D(x * 0.1, y * 0.1, z * 0.1)
+    // noise.noise3D(x, y, z) +
+    noise.noise3D(x * 0.5, y * 0.5, z * 0.5)
   ) - 0.3 - Math.max(0, y * 2)
 }
