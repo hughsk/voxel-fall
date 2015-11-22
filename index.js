@@ -19,7 +19,6 @@ const camera = Camera(canvas)
 const gl = canvas.getContext('webgl')
 const sphere = new Sphere(gl)
 const box = new Box(gl)
-
 camera.distance = 4
 
 // Physics
@@ -50,6 +49,10 @@ const MAX_SUB_STEPS = 1
 const MAX_VELOCITY = 10
 
 const ball = makeBall()
+
+const boxes = []
+const MAX_BOXES = 20
+
 window.CANNON = CANNON
 window.world = world
 
@@ -130,6 +133,15 @@ function render () {
 
     chunk.bind(proj, view, camera.center, [camera.center[0] - 5, camera.center[1], camera.center[2]])
     chunk.draw(proj, view)
+    for (var i = 0; i < chunk.boxes.length; i++) {
+      const boxEntity = chunk.boxes[i]
+      box.draw(proj, view, [boxEntity.position.x, boxEntity.position.y, boxEntity.position.z], [boxEntity.quaternion.x, boxEntity.quaternion.y, boxEntity.quaternion.z, boxEntity.quaternion.w])
+    }
+
+    //const boxEntity = chunk.boxes[0]
+    //if (boxEntity) {
+      //console.log('box', boxEntity.position.x, boxEntity.position.y, boxEntity.position.z)
+    //}
   }
 
   //for (var i = 0, l = world.bodies.length; i < l; i++) {
@@ -138,12 +150,10 @@ function render () {
     //v.computeAABB()
     //const {lowerBound, upperBound} = v.aabb
     //const p = v.position
-    //box.draw(proj, view, [lowerBound.x, lowerBound.y, lowerBound.z], [upperBound.x, upperBound.y, upperBound.z])
   //}
 
-  sphere.draw(proj, view, [1.8, 0.7, 0.4], [ball.position.x, ball.position.y, ball.position.z], [ball.quaternion.x, ball.quaternion.y, ball.quaternion.z, ball.quaternion.w])
-  sphere.draw(proj, view, [0.3, 0.8, 1.8], [ball.position.x - 5, ball.position.y, ball.position.z], [ball.quaternion.x, ball.quaternion.y, ball.quaternion.z, ball.quaternion.w])
 
+  sphere.draw(proj, view, [ball.position.x, ball.position.y, ball.position.z], [ball.quaternion.x, ball.quaternion.y, ball.quaternion.z, ball.quaternion.w])
   const lr = pressed('<right>') - pressed('<left>')
   const ud = pressed('<up>') - pressed('<down>')
   const jump = pressed('<space>')
@@ -155,6 +165,15 @@ function render () {
 
   raf(render)
 }
+let boxesCollected = 0
+ball.addEventListener("collide",function(e){
+  if (!e.body.isBox) return
+  const b = e.body
+  console.log('BOXES COLLECTED', ++boxesCollected)
+  setTimeout(() => {
+    b.chunk.removeBox(b)
+  })
+});
 
 function makeBall() {
   // Create a sphere
@@ -166,7 +185,7 @@ function makeBall() {
     linearDamping: 0.1
   })
 
-  sphereBody.velocity = new CANNON.Vec3(2 * Math.random(), Math.random(), 5 * Math.random())
+  //sphereBody.velocity = new CANNON.Vec3(2 * Math.random(), Math.random(), 5 * Math.random())
   world.addBody(sphereBody)
   return sphereBody
 }

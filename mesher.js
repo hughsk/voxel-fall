@@ -47,12 +47,16 @@ export default function generate (lo, hi) {
   const dims = [hi[0] - lo[0], hi[1] - lo[1], hi[2] - lo[2]]
   const size = dims[0] * dims[1] * dims[2]
   const data = new Float32Array(size)
+  const boxes = []
 
   var i = 0
   for (var z = lo[2]; z < hi[2]; z++) {
     for (var y = lo[1]; y < hi[1]; y++) {
       for (var x = lo[0]; x < hi[0]; x++) {
         data[i++] = terrain(x, y, z)
+        if (data[i] <= 0 && Math.random() < 0.0001) {
+          boxes.push([x, y, z])
+        }
       }
     }
   }
@@ -61,6 +65,7 @@ export default function generate (lo, hi) {
   const output = []
 
   mesher(array, output)
+
   const body = new CANNON.Body(STATIC_BODY)
 
   const meshes = []
@@ -87,6 +92,7 @@ export default function generate (lo, hi) {
     mesh,
     lo,
     hi,
-    body
+    body,
+    boxes
   }
 }

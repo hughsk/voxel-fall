@@ -40,8 +40,16 @@ export default class Chunk {
     // Physics
     this.world = world
     this.physics = data.body
+    this.boxes = []
 
-    world.addBody(this.physics)
+    for (let i = 0; i < data.boxes.length; i++) {
+      const box = makeBox(data.boxes[i])
+      box.chunk = this
+      this.boxes.push(box)
+      this.world.addBody(box)
+    }
+
+    this.world.addBody(this.physics)
 
   }
 
@@ -56,6 +64,15 @@ export default class Chunk {
     this.shader.uniforms.light2 = badLight
   }
 
+  removeBox (box) {
+    const i = this.boxes.indexOf(box)
+    var f = this.boxes.length
+    if (i === -1) return
+    this.world.removeBody(box)
+    this.boxes.splice(i, 1)
+    console.log('boxes', f, this.boxes.length)
+  }
+
   draw (proj, view) {
     if (this.disposed) return
     this.shader.uniforms.model = this.model
@@ -66,9 +83,29 @@ export default class Chunk {
     this.disposed = true
     this.geometry.dispose()
     this.world.removeBody(this.physics)
+    this.boxes.forEach(box => {
+      this.world.removeBody(box)
+    })
+    this.boxes = null
     this.world = null
     this.geometry = null
     this.shader = null
     this.physics = null
   }
 }
+
+
+function makeBox(pos) {
+  const box = new CANNON.Body({
+    allowSleep: true,
+    mass: 10, // kg
+    position: new CANNON.Vec3(pos[0], pos[1], pos[2]), // m
+    shape: new CANNON.Box(new CANNON.Vec3(0.5, 0.5, 0.5)),
+    linearDamping: 0.1,
+    velocity: new CANNON.Vec3(2 * Math.random(), Math.random(), 5 * Math.random())
+  })
+  box.isBox = true
+  return box
+}
+
+
