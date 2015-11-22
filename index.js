@@ -57,9 +57,7 @@ const view = new Float32Array(16)
 const start = Date.now()
 
 render()
-//setInterval(() => {
-  //console.log('collisionMatrix', world.collisionMatrix.matrix.length)
-//})
+
 function render () {
 
   // Phsics

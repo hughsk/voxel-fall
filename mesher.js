@@ -28,17 +28,22 @@ const mesher = greedy({
     }
 
     // Physics
-    const pmesh = new CANNON.Box(new CANNON.Vec3(xd/2, yd/2, zd/2))
-    const body = new CANNON.Body({ mass: 0, allowSleep: true })
-    body.addShape(pmesh)
-    body.position.set(
+    const ppos = [
       (xlo + xhi) / 2,
       (ylo + yhi) / 2,
       (zlo + zhi) / 2
-    )
-    output.push({ mesh, body })
+    ]
+    const pmesh = new CANNON.Box(new CANNON.Vec3(xd/2, yd/2, zd/2))
+    const physics = {
+      mesh: pmesh,
+      pos: ppos
+    }
+
+    output.push({ mesh, physics })
   }
 })
+
+const STATIC_BODY = { mass: 0, allowSleep: true }
 
 export default function generate (lo, hi) {
   const dims = [hi[0] - lo[0], hi[1] - lo[1], hi[2] - lo[2]]
@@ -58,22 +63,32 @@ export default function generate (lo, hi) {
   const output = []
 
   mesher(array, output)
+  const body = new CANNON.Body(STATIC_BODY)
 
-  const mesh = combine(output.map(d => d.mesh))
-  const bodies = output.map(d => d.body)
-  bodies.forEach(b => {
-    b.position.set(
-      b.position.x + lo[2],
-      b.position.y + lo[1],
-      b.position.z + lo[0]
-    )
-  })
+  let meshes = []
+
+  for (let i = 0; i < output.length; i++) {
+    meshes.push(output[i].mesh)
+    const {mesh, pos} = output[i].physics
+    body.addShape(mesh, new CANNON.Vec3(
+      pos[0],
+      pos[1],
+      pos[2]
+    ))
+  }
+
+  const mesh = combine(meshes)
+  body.position.set(
+    lo[2],
+    lo[1],
+    lo[0]
+  )
 
 
   return {
     mesh,
     lo,
     hi,
-    bodies: output.map(d => d.body)
+    body
   }
 }
