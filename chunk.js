@@ -6,12 +6,16 @@ import normals from 'face-normals'
 import unindex from 'unindex-mesh'
 import Shader from 'gl-shader'
 import eye from 'eye-vector'
+import CANNON from 'cannon'
+import glVec3 from 'gl-vec3'
 
 const glslify = require('glslify')
 var shader
 
+const norm = identity(new Float32Array(16))
+
 export default class Chunk {
-  constructor (gl, data) {
+  constructor (gl, world, data) {
     const positions = unindex(data.mesh)
 
     this.gl = gl
@@ -32,15 +36,23 @@ export default class Chunk {
       +data.lo[1],
       +data.lo[0]
     ])
+
+    // Physics
+    this.world = world
+    this.physics = data.body
+
+    world.addBody(this.physics)
+
   }
 
-  bind (proj, view) {
+  bind (proj, view, light) {
     if (this.disposed) return
     this.geometry.bind(this.shader)
     this.shader.uniforms.proj = proj
     this.shader.uniforms.view = view
+    this.shader.uniforms.norm = norm
     this.shader.uniforms.eye = eye(view, this.eye)
-    this.shader.uniforms.light = [0, 0, 0]
+    this.shader.uniforms.light = light
   }
 
   draw (proj, view) {
@@ -52,7 +64,10 @@ export default class Chunk {
   dispose () {
     this.disposed = true
     this.geometry.dispose()
+    this.world.removeBody(this.physics)
+    this.world = null
     this.geometry = null
     this.shader = null
+    this.physics = null
   }
 }

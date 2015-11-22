@@ -4,6 +4,9 @@ import combine from 'mesh-combine'
 import Box from 'primitive-cube'
 import terrain from './terrain'
 import ndarray from 'ndarray'
+import CANNON from 'cannon'
+
+const STATIC_BODY = { mass: 0, allowSleep: true }
 
 const mesher = greedy({
   order: [0, 1, 2],
@@ -24,8 +27,19 @@ const mesher = greedy({
       pos[i][2] = pos[i][2] === -0.5 ? zlo : zhi
     }
 
+    // Physics
+    const ppos = [
+      (xlo + xhi) / 2,
+      (ylo + yhi) / 2,
+      (zlo + zhi) / 2
+    ]
+    const pmesh = new CANNON.Box(new CANNON.Vec3(xd/2, yd/2, zd/2))
+    const physics = {
+      mesh: pmesh,
+      pos: ppos
+    }
 
-    output.push({ mesh })
+    output.push({ mesh, physics })
   }
 })
 
@@ -43,16 +57,36 @@ export default function generate (lo, hi) {
     }
   }
 
-  var array = ndarray(data, dims)
-  var output = []
+  const array = ndarray(data, dims)
+  const output = []
 
   mesher(array, output)
+  const body = new CANNON.Body(STATIC_BODY)
 
-  var mesh = combine(output.map(d => d.mesh))
+  const meshes = []
+
+  for (let i = 0; i < output.length; i++) {
+    meshes.push(output[i].mesh)
+    const {mesh, pos} = output[i].physics
+    body.addShape(mesh, new CANNON.Vec3(
+      pos[0],
+      pos[1],
+      pos[2]
+    ))
+  }
+
+  const mesh = combine(meshes)
+  body.position.set(
+    lo[2],
+    lo[1],
+    lo[0]
+  )
+
 
   return {
-    mesh: mesh,
-    lo: lo,
-    hi: hi
+    mesh,
+    lo,
+    hi,
+    body
   }
 }
