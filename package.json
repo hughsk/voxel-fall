@@ -32,10 +32,29 @@
     "spatial-noise": "^1.0.0",
     "unindex-mesh": "^2.0.0"
   },
+  "scripts": {
+    "start": "budo index.js --watch"
+  },
   "browserify": {
     "transform": [
       "babelify",
       "glslify"
     ]
-  }
+  },
+  "devDependencies": {
+    "budo": "^6.1.0"
+  },
+  "description": "Simple game made in < 48 hours by [hughsk](https://github.com/hughsk) & [timoxley](https://github.com/timoxley) for [CampJS VI, November 2015](http://vi.campjs.com).",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hughsk/voxel-fall.git"
+  },
+  "keywords": [],
+  "author": "Tim Oxley <secoif@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hughsk/voxel-fall/issues"
+  },
+  "homepage": "https://github.com/hughsk/voxel-fall#readme"
 }
