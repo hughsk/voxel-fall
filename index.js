@@ -143,16 +143,9 @@ function render () {
     }
   }
 
-  //for (var i = 0, l = world.bodies.length; i < l; i++) {
-    //var v = world.bodies[i];
-    //if (v === ball) continue
-    //v.computeAABB()
-    //const {lowerBound, upperBound} = v.aabb
-    //const p = v.position
-  //}
-
   sphere.draw(proj, view, [1.8, 0.7, 0.4], [ball.position.x, ball.position.y, ball.position.z], [ball.quaternion.x, ball.quaternion.y, ball.quaternion.z, ball.quaternion.w])
   sphere.draw(proj, view, [0.3, 0.8, 1.8], [badBall.position.x, badBall.position.y, badBall.position.z], [badBall.quaternion.x, badBall.quaternion.y, badBall.quaternion.z, badBall.quaternion.w])
+
   if (gameOver) return
   const lr = pressed('<right>') - pressed('<left>')
   const ud = pressed('<up>') - pressed('<down>')

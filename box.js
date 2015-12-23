@@ -13,7 +13,7 @@ const glslify = require('glslify')
 const scratch = new Float32Array(16)
 const norm = new Float32Array(16)
 
-export default class Sphere {
+export default class Box {
   constructor (gl, world) {
     const positions = unindex(Cube(1))
 
