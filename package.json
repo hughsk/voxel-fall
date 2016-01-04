@@ -34,7 +34,7 @@
     "unindex-mesh": "^2.0.0"
   },
   "scripts": {
-    "start": "budo index.js --watch"
+    "start": "budo index.js:bundle.js --watch"
   },
   "browserify": {
     "transform": [
