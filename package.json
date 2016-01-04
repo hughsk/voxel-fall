@@ -2,8 +2,8 @@
   "name": "voxel-fall",
   "version": "1.0.0",
   "dependencies": {
+    "alea": "0.0.9",
     "babelify": "^6.4.0",
-    "glslify": "^2.3.1",
     "cannon": "^0.6.2",
     "canvas-fit": "^1.5.0",
     "canvas-orbit-camera": "^1.0.2",
@@ -19,6 +19,7 @@
     "glsl-diffuse-oren-nayar": "^1.0.2",
     "glsl-fog": "0.0.1",
     "glsl-specular-gaussian": "^1.0.0",
+    "glslify": "^2.3.1",
     "greedy-mesher": "^1.0.2",
     "icosphere": "^1.0.0",
     "key-pressed": "0.0.1",

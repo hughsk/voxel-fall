@@ -5,6 +5,7 @@ import Box from 'primitive-cube'
 import terrain from './terrain'
 import ndarray from 'ndarray'
 import CANNON from 'cannon'
+import random from './random'
 
 const STATIC_BODY = { mass: 0, allowSleep: true }
 
@@ -54,7 +55,7 @@ export default function generate (lo, hi) {
     for (var y = lo[1]; y < hi[1]; y++) {
       for (var x = lo[0]; x < hi[0]; x++) {
         data[i++] = terrain(x, y, z)
-        if (data[i] <= 0 && Math.random() < 0.0001) {
+        if (data[i] <= 0 && random() < 0.0001) {
           boxes.push([z, y, x])
         }
       }

@@ -1,6 +1,7 @@
 import Noise from 'simplex-noise'
+import random from './random'
 
-const noise = new Noise()
+const noise = new Noise(random)
 
 export default function terrain (x, y, z) {
   x *= 0.04
